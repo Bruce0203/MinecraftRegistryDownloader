@@ -1,5 +1,7 @@
-package io.github.bruce0203
+package io.github.bruce0203.scheme
 
+import io.github.bruce0203.getAsJson
+import io.ktor.client.*
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -18,3 +20,5 @@ data class Manifest(
         )
     }
 }
+
+suspend fun HttpClient.getManifest(version: Versions.Version) = getAsJson<Manifest>(version.url)

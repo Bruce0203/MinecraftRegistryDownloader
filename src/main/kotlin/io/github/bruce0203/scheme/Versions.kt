@@ -1,5 +1,7 @@
-package io.github.bruce0203
+package io.github.bruce0203.scheme
 
+import io.github.bruce0203.getAsJson
+import io.ktor.client.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -11,6 +13,7 @@ data class Versions(
     @Serializable
     data class Latest(val release: String, val snapshot: String)
 
+    @Suppress("unused")
     @Serializable
     enum class VersionType {
         @SerialName("snapshot")
@@ -34,3 +37,8 @@ data class Versions(
         val complianceLevel: Int
     )
 }
+
+suspend fun HttpClient.getVersions() =
+    getAsJson<Versions>("https://piston-meta.mojang.com/mc/game/version_manifest_v2.json")
+
+fun Versions.getLatestRelease(): Versions.Version = versions.find { it.id == latest.release }!!

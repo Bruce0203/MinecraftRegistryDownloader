@@ -28,4 +28,10 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.ktor.client.cio)
     implementation(libs.ktor.client.core)
+
+    testImplementation(libs.kotest.junit.runner)
+    testImplementation(libs.kotest.engine)
+    testImplementation(libs.kotest.assertion)
+    testImplementation(libs.kotest.property)
+    testImplementation(libs.kotlin.reflect)
 }
