@@ -9,6 +9,7 @@ fun main(args: Array<String>) = runBlocking<Unit> {
         args.contains("--releases") -> downloadAndGetRegistries {
             it.versions.filter { version -> version.type == Versions.VersionType.Release }
         }
+        args.contains("--target") -> downloadAndGetRegistry { it.versions.find { it.id == args[1] }!! }
         args.contains("--all") -> downloadAndGetRegistries { it.versions }
         else -> downloadAndGetRegistry { it.getLatestRelease() }
     }
